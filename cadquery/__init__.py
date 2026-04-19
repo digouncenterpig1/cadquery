@@ -1,80 +1,73 @@
-from importlib.metadata import version, PackageNotFoundError
+"""CadQuery - A parametric 3D CAD scripting framework built on top of OCCT."""
 
-try:
-    __version__ = version("cadquery")
-except PackageNotFoundError:
-    # package is not installed
-    __version__ = "2.8.0dev"
-
-# these items point to the OCC implementation
-from .occ_impl.geom import Plane, BoundBox, Vector, Matrix, Location
+from .cq import (
+    CQContext,
+    CadQuery,
+    Workplane,
+)
+from .occ_impl.geom import Vector, Matrix, Plane, Location
 from .occ_impl.shapes import (
     Shape,
     Vertex,
     Edge,
-    Face,
     Wire,
-    Solid,
+    Face,
     Shell,
+    Solid,
     Compound,
-    sortWiresByBuildOrder,
 )
-from .occ_impl import exporters
-from .occ_impl import importers
-
-# these items are the common implementation
-
-# the order of these matter
+from .assembly import Assembly, Constraint
 from .selectors import (
+    Selector,
     NearestToPointSelector,
     ParallelDirSelector,
     DirectionSelector,
     PerpendicularDirSelector,
     TypeSelector,
     DirectionMinMaxSelector,
+    RadiusNthSelector,
+    CenterNthSelector,
+    DirectionNthSelector,
+    LengthNthSelector,
+    AreaNthSelector,
     StringSyntaxSelector,
-    Selector,
 )
-from .sketch import Sketch
-from .cq import CQ, Workplane
-from .assembly import Assembly, Color, Constraint, Material
-from . import selectors
-from . import plugins
+from .exporters import exporters
+from . import importers
 
+__version__ = "2.4.0"
 
 __all__ = [
-    "CQ",
+    "CQContext",
+    "CadQuery",
     "Workplane",
-    "Assembly",
-    "Color",
-    "Constraint",
-    "Material",
-    "plugins",
-    "selectors",
-    "Plane",
-    "BoundBox",
-    "Matrix",
     "Vector",
+    "Matrix",
+    "Plane",
     "Location",
-    "sortWiresByBuildOrder",
     "Shape",
     "Vertex",
     "Edge",
     "Wire",
     "Face",
-    "Solid",
     "Shell",
+    "Solid",
     "Compound",
-    "exporters",
-    "importers",
+    "Assembly",
+    "Constraint",
+    "Selector",
     "NearestToPointSelector",
     "ParallelDirSelector",
     "DirectionSelector",
     "PerpendicularDirSelector",
     "TypeSelector",
     "DirectionMinMaxSelector",
+    "RadiusNthSelector",
+    "CenterNthSelector",
+    "DirectionNthSelector",
+    "LengthNthSelector",
+    "AreaNthSelector",
     "StringSyntaxSelector",
-    "Selector",
-    "plugins",
-    "Sketch",
+    "exporters",
+    "importers",
 ]
