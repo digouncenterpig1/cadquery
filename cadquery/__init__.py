@@ -44,12 +44,16 @@ __version__ = "2.4.0"
 # Handy shorthand alias - I always type cq.WP instead of cq.Workplane anyway
 WP = Workplane
 
+# Another shorthand I use constantly in scripts
+V = Vector
+
 __all__ = [
     "CQContext",
     "CadQuery",
     "Workplane",
     "WP",
     "Vector",
+    "V",
     "Matrix",
     "Plane",
     "Location",
