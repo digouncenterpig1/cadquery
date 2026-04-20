@@ -1,6 +1,8 @@
 """CadQuery - A parametric 3D CAD scripting framework built on top of OCCT."""
 
 # Personal fork - using this for learning CadQuery and building custom parts
+# Fork started: tracking upstream 2.4.0 release
+# Upstream: https://github.com/CadQuery/cadquery
 
 from .cq import (
     CQContext,
@@ -39,10 +41,14 @@ from . import importers
 
 __version__ = "2.4.0"
 
+# Handy shorthand alias - I always type cq.WP instead of cq.Workplane anyway
+WP = Workplane
+
 __all__ = [
     "CQContext",
     "CadQuery",
     "Workplane",
+    "WP",
     "Vector",
     "Matrix",
     "Plane",
