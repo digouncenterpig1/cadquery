@@ -1,5 +1,7 @@
 """CadQuery - A parametric 3D CAD scripting framework built on top of OCCT."""
 
+# Personal fork - using this for learning CadQuery and building custom parts
+
 from .cq import (
     CQContext,
     CadQuery,
