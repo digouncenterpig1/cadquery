@@ -25,6 +25,13 @@ class Vector:
 
     Wraps the OCC gp_Vec and gp_Pnt types to provide a convenient
     Python interface for vector math.
+
+    Examples:
+        >>> v = Vector(1, 2, 3)
+        >>> v.length()
+        3.7416573867739413
+        >>> v.normalized()
+        Vector(0.267, 0.535, 0.802)
     """
 
     def __init__(self, *args):
@@ -89,76 +96,14 @@ class Vector:
         """Convert to an OCC gp_Dir (unit direction)."""
         return gp_Dir(self._wrapped)
 
+    def __repr__(self) -> str:
+        """Return a readable string representation of the vector."""
+        return f"Vector({self.x:.3f}, {self.y:.3f}, {self.z:.3f})"
+
     def __add__(self, other: "Vector") -> "Vector":
         return Vector(self._wrapped.Added(other._wrapped))
 
     def __sub__(self, other: "Vector") -> "Vector":
         return Vector(self._wrapped.Subtracted(other._wrapped))
 
-    def __mul__(self, scalar: float) -> "Vector":
-        return Vector(self._wrapped.Multiplied(scalar))
-
-    def __rmul__(self, scalar: float) -> "Vector":
-        return self.__mul__(scalar)
-
-    def __neg__(self) -> "Vector":
-        return Vector(self._wrapped.Reversed())
-
-    def __repr__(self) -> str:
-        return f"Vector({self.x:.6g}, {self.y:.6g}, {self.z:.6g})"
-
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other, Vector):
-            return NotImplemented
-        return self._wrapped.IsEqual(other._wrapped, 1e-9, 1e-9)
-
-
-class BoundingBox:
-    """Axis-aligned bounding box."""
-
-    def __init__(self, bb: Optional[Bnd_Box] = None):
-        if bb is None:
-            self._bbox = Bnd_Box()
-        else:
-            self._bbox = bb
-
-        self.xmin, self.ymin, self.zmin = 0.0, 0.0, 0.0
-        self.xmax, self.ymax, self.zmax = 0.0, 0.0, 0.0
-
-        if not self._bbox.IsVoid():
-            self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax = (
-                self._bbox.Get()
-            )
-
-    @property
-    def center(self) -> Vector:
-        """Return the center point of the bounding box."""
-        return Vector(
-            (self.xmin + self.xmax) / 2.0,
-            (self.ymin + self.ymax) / 2.0,
-            (self.zmin + self.zmax) / 2.0,
-        )
-
-    @property
-    def diagonal_length(self) -> float:
-        """Return the length of the space diagonal."""
-        return math.sqrt(
-            (self.xmax - self.xmin) ** 2
-            + (self.ymax - self.ymin) ** 2
-            + (self.zmax - self.zmin) ** 2
-        )
-
-    def is_inside(self, point: Vector) -> bool:
-        """Check whether a point lies within the bounding box."""
-        return (
-            self.xmin <= point.x <= self.xmax
-            and self.ymin <= point.y <= self.ymax
-            and self.zmin <= point.z <= self.zmax
-        )
-
-    def __repr__(self) -> str:
-        return (
-            f"BoundingBox(x=[{self.xmin:.4g}, {self.xmax:.4g}], "
-            f"y=[{self.ymin:.4g}, {self.ymax:.4g}], "
-            f"z=[{self.zmin:.4g}, {self.zmax:.4g}])"
-        )
+    def __mul__(self
