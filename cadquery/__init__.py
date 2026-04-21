@@ -47,6 +47,9 @@ WP = Workplane
 # Another shorthand I use constantly in scripts
 V = Vector
 
+# Shorthand for Assembly - I use this a lot for multi-part models
+Asm = Assembly
+
 __all__ = [
     "CQContext",
     "CadQuery",
@@ -66,6 +69,7 @@ __all__ = [
     "Solid",
     "Compound",
     "Assembly",
+    "Asm",
     "Constraint",
     "Selector",
     "NearestToPointSelector",
