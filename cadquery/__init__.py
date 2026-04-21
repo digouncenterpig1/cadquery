@@ -50,6 +50,12 @@ V = Vector
 # Shorthand for Assembly - I use this a lot for multi-part models
 Asm = Assembly
 
+# Shorthand for Plane - useful when setting up custom work planes quickly
+Pl = Plane
+
+# Shorthand for Location - comes up a lot in assembly positioning
+Loc = Location
+
 __all__ = [
     "CQContext",
     "CadQuery",
@@ -59,7 +65,9 @@ __all__ = [
     "V",
     "Matrix",
     "Plane",
+    "Pl",
     "Location",
+    "Loc",
     "Shape",
     "Vertex",
     "Edge",
