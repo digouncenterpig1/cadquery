@@ -56,6 +56,9 @@ Pl = Plane
 # Shorthand for Location - comes up a lot in assembly positioning
 Loc = Location
 
+# Shorthand for Compound - handy when working with boolean operations
+Cpd = Compound
+
 __all__ = [
     "CQContext",
     "CadQuery",
@@ -76,6 +79,7 @@ __all__ = [
     "Shell",
     "Solid",
     "Compound",
+    "Cpd",
     "Assembly",
     "Asm",
     "Constraint",
