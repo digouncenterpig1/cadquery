@@ -38,6 +38,7 @@ class Vector:
         if len(args) == 3:
             self._wrapped = gp_Vec(args[0], args[1], args[2])
         elif len(args) == 2:
+            # 2-arg form assumes Z=0, useful for 2D work
             self._wrapped = gp_Vec(args[0], args[1], 0.0)
         elif len(args) == 1:
             arg = args[0]
@@ -96,14 +97,18 @@ class Vector:
         """Convert to an OCC gp_Dir (unit direction)."""
         return gp_Dir(self._wrapped)
 
-    def __repr__(self) -> str:
-        """Return a readable string representation of the vector."""
-        return f"Vector({self.x:.3f}, {self.y:.3f}, {self.z:.3f})"
-
     def __add__(self, other: "Vector") -> "Vector":
+        """Add two vectors together."""
         return Vector(self._wrapped.Added(other._wrapped))
 
     def __sub__(self, other: "Vector") -> "Vector":
+        """Subtract another vector from this one."""
         return Vector(self._wrapped.Subtracted(other._wrapped))
 
-    def __mul__(self
+    def __mul__(self, scalar: float) -> "Vector":
+        """Multiply this vector by a scalar."""
+        return Vector(self._wrapped.Multiplied(scalar))
+
+    def __repr__(self) -> str:
+        """Return a readable string representation of the vector."""
+        return f"Vector({self.x:.3f}, {self.y:.3f}, {self.z:.3f})"
