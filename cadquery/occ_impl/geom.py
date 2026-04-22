@@ -32,6 +32,10 @@ class Vector:
         3.7416573867739413
         >>> v.normalized()
         Vector(0.267, 0.535, 0.802)
+        >>> v1 = Vector(1, 0, 0)
+        >>> v2 = Vector(0, 1, 0)
+        >>> v1.dot(v2)
+        0.0
     """
 
     def __init__(self, *args):
@@ -97,18 +101,4 @@ class Vector:
         """Convert to an OCC gp_Dir (unit direction)."""
         return gp_Dir(self._wrapped)
 
-    def __add__(self, other: "Vector") -> "Vector":
-        """Add two vectors together."""
-        return Vector(self._wrapped.Added(other._wrapped))
-
-    def __sub__(self, other: "Vector") -> "Vector":
-        """Subtract another vector from this one."""
-        return Vector(self._wrapped.Subtracted(other._wrapped))
-
-    def __mul__(self, scalar: float) -> "Vector":
-        """Multiply this vector by a scalar."""
-        return Vector(self._wrapped.Multiplied(scalar))
-
-    def __repr__(self) -> str:
-        """Return a readable string representation of the vector."""
-        return f"Vector({self.x:.3f}, {self.y:.3f}, {self.z:.3f})"
+    def __add__(self, other: "Ve
